@@ -84,3 +84,12 @@ https://www.jianshu.com/p/ac8853927528
 
 然后导入316.json模板
 
+
+
+模板315最新
+
+https://grafana.com/grafana/dashboards/315
+
+
+我的是1621模版
+https://grafana.com/grafana/dashboards/1621/revisions

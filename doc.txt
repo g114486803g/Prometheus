@@ -18,3 +18,69 @@ Grafana是一个跨平台的开源的度量分析和可视化工具，可以通�
 6、过滤器：Ad-hoc过滤器允许动态创建新的键/值过滤器，这些过滤器会自动应用于使用该数据源的所有查询。
 
 -------------------
+
+集群中创建namespace
+
+kubectl apply -f  namespace.yaml
+
+2.安装node-exporter
+在kubernetest集群中部署node-exporter，Node-exporter用于采集kubernetes集群中各个节点的物理指标，比如：Memory、CPU等。可以直接在每个物理节点是直接安装，这里我们使用DaemonSet部署到每个节点上，使用 hostNetwork: true 和 hostPID: true 使其获得Node的物理指标信息，配置tolerations使其在master节点也启动一个pod。
+kubectl apply -f node-exporter.yaml
+
+检验node-exporter是否成功运行
+
+3.部署Prometheus pod
+
+prometheus.yaml 中包含rbac认证、ConfigMap等。
+kubectl apply -f prometheus.yaml 
+
+
+[root@k8s-m 123+123]# kubectl get pod -n ns-monitor 
+NAME                         READY   STATUS    RESTARTS   AGE
+grafana-576db894c6-2mpfj     1/1     Running   0          10h
+node-exporter-7pg5h          1/1     Running   0          10h
+node-exporter-crzx6          1/1     Running   0          10h
+node-exporter-gxqxk          1/1     Running   0          10h
+prometheus-dd69c4889-t6dv4   1/1     Running   0          10h
+
+
+[root@master188 ~]# kubectl get svc -n ns-monitor 
+NAME                    TYPE       CLUSTER-IP    EXTERNAL-IP   PORT(S)          AGE
+grafana-service         NodePort   10.111.77.6   <none>        3000:30100/TCP   13h
+node-exporter-service   NodePort   10.111.6.64   <none>        9100:31672/TCP   21h
+prometheus-service      NodePort   10.102.83.9   <none>        9090:32670/TCP   20h
+
+
+
+
+查看node-exporter数据是否加载
+[root@master188 ~]# curl http://192.168.1.146:31672/metrics | more
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0# HELP go_gc_duration_seconds A summary of the GC invocation durations.
+# TYPE go_gc_duration_seconds summary
+go_gc_duration_seconds{quantile="0"} 0.000281711
+go_gc_duration_seconds{quantile="0.25"} 0.000281711
+go_gc_duration_seconds{quantile="0.5"} 0.000281711
+go_gc_duration_seconds{quantile="0.75"} 0.000281711
+go_gc_duration_seconds{quantile="1"} 0.000281711
+go_gc_duration_seconds_sum 0.000281711
+go_gc_duration_seconds_count 1
+# HELP go_goroutines Number of goroutines that currently exist.
+# TYPE go_goroutines gauge
+go_goroutines 6
+# HELP go_info Information about the Go environment.
+
+
+访问prometheus得到数据就成功了
+http://192.168.1.146:32670/targets
+
+
+最后需要加载grafana了
+
+
+
+https://www.jianshu.com/p/ac8853927528
+
+然后导入
+

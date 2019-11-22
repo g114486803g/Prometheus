@@ -82,5 +82,5 @@ http://192.168.1.146:32670/targets
 
 https://www.jianshu.com/p/ac8853927528
 
-然后导入
+然后导入316.json模板
 

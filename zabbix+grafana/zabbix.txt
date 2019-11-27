@@ -1,0 +1,12 @@
+docker pull registry.cn-shenzhen.aliyuncs.com/jbjb/test:grafana-zabbix
+docker tag registry.cn-shenzhen.aliyuncs.com/jbjb/test:grafana-zabbix grafana-zabbix:c02
+docker rmi registry.cn-shenzhen.aliyuncs.com/jbjb/test:grafana-zabbix 
+
+ docker run -d --name pro-grafana -p3003:3000 grafana-zabbix:c02 
+ 
+ 
+ 输入需要的链接
+http://0.0.0.0/zabbix/api_jsonrpc.php
+
+模板选择
+https://grafana.com/grafana/dashboards?search=zabbix

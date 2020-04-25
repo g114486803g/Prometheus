@@ -1,3 +1,12 @@
+https://github.com/kubernetes/kube-state-metrics
+• 集群资源监控：3119
+• 资源状态监控 ：6417
+• Node监控 ：9276
+
+这是常用的，也可以根据自己的需要去官网https://grafana.com/grafana/dashboards
+
+
+
 Prometheus的主要特点是：
 1.一个多维数据模型（时间序列由指标名称定义和设置键/值尺寸）；
 2.非常高效的存储，平均一个采样数据占~3.5bytes左右，320万的时间序列，每30秒采样，保持60天，消耗磁盘大概228G；

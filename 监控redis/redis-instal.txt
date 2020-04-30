@@ -1,0 +1,14 @@
+https://hub.docker.com/r/oliver006/redis_exporter
+
+
+redis监控
+https://quay.io/repository/coreos/etcd?tag=latest&tab=tags
+
+docker pull oliver006/redis_exporter:latest
+
+docker run -d --name redis_exporter -p 9121:9121 oliver006/redis_exporter:latest redis.addr=10.22.32.10:6379  -e REDIS_PASSWORD="63KxsHOY4g939Apq"
+
+监控规则
+- job_name: redis_exporter
+  static_configs:
+  - targets: ['localhost:9121']

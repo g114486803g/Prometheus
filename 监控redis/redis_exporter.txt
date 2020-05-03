@@ -20,5 +20,29 @@ WantedBy=multi-user.target
 
 -redis.addr 192.168.22.33:6379 -redis.password 123456 --> 配置 redis 连接信息
 
+得到以下
+[root@VM_32_10_centos src]# curl http://10.22.32.10:9121/metrics | more
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0# HELP go_gc_duration_seconds A summary of the pause duration of garbage collection cycles.
+# TYPE go_gc_duration_seconds summary
+go_gc_duration_seconds{quantile="0"} 7.484e-06
+go_gc_duration_seconds{quantile="0.25"} 2.3747e-05
+go_gc_duration_seconds{quantile="0.5"} 3.524e-05
+go_gc_duration_seconds{quantile="0.75"} 7.2188e-05
+go_gc_duration_seconds{quantile="1"} 0.001110897
+go_gc_duration_seconds_sum 0.006010745
+go_gc_duration_seconds_count 103
+# HELP go_goroutines Number of goroutines that currently exist.
+# TYPE go_goroutines gauge
+go_goroutines 10
+# HELP go_info Information about the Go environment.
+# TYPE go_info gauge
+go_info{version="go1.14.2"} 1
+# HELP go_memstats_alloc_bytes Number of bytes allocated and still in use.
+
+
+
+展示
 
  https://grafana.com/dashboards/763 下载 json 文件，导入 grafana，根据需求调整即

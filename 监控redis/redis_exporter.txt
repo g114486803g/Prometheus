@@ -1,0 +1,24 @@
+下载地址
+https://github.com/oliver006/redis_exporter/releases
+
+# vim /etc/systemd/system/redis_exporter.service
+[Unit]
+Description=redis_exporter
+After=network.target
+
+[Service]
+Restart=on-failure
+ExecStart=/usr/local/redis_exporter-v1.0.0.linux-amd64/redis_exporter -redis.addr 192.168.22.33:6379 -redis.password 123456
+
+[Install]
+WantedBy=multi-user.target
+
+# systemctl daemon-reload
+# systemctl start redis_exporter
+# systemctl status redis_exporter
+
+
+-redis.addr 192.168.22.33:6379 -redis.password 123456 --> 配置 redis 连接信息
+
+
+ https://grafana.com/dashboards/763 下载 json 文件，导入 grafana，根据需求调整即

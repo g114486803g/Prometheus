@@ -17,4 +17,5 @@ docker run -d -p 18060:8060 --name webhook timonwong/prometheus-webhook-dingtalk
 ```
 docker run -d --name alertmanager -p 9093:9093 -v  /etc/localtime:/etc/localtime:ro -v /monit/alertmanager.yml:/etc/alertmanager/alertmanager.yml prom/alertmanager:latest
 ```
-
+4，登录钉钉
+https://github.com/g114486803g/Prometheus/raw/master/%E9%92%89%E9%92%89%E5%91%8A%E8%AD%A6/m/aler.png
